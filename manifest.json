@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "HH: безопасные автоотклики из поиска",
+  "version": "2.2.0",
+  "description": "Последовательно отправляет отклики из выбранной пользователем поисковой выдачи HeadHunter.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://hh.ru/search/vacancy*",
+        "https://*.hh.ru/search/vacancy*",
+        "https://hh.ru/applicant/vacancy_response*",
+        "https://*.hh.ru/applicant/vacancy_response*",
+        "https://hh.kz/search/vacancy*",
+        "https://*.hh.kz/search/vacancy*",
+        "https://hh.kz/applicant/vacancy_response*",
+        "https://*.hh.kz/applicant/vacancy_response*",
+        "https://hh.uz/search/vacancy*",
+        "https://*.hh.uz/search/vacancy*",
+        "https://hh.uz/applicant/vacancy_response*",
+        "https://*.hh.uz/applicant/vacancy_response*"
+      ],
+      "js": ["hh-auto-response.user.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

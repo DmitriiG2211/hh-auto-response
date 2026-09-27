@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HH автоотклики — локальная установка</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, Arial, sans-serif; }
+    body { margin: 0; background: #f5f6f7; color: #171717; }
+    main { max-width: 680px; margin: 8vh auto; padding: 36px; background: #fff; border-radius: 22px; box-shadow: 0 16px 50px #0001; }
+    h1 { margin-top: 0; }
+    p, li { line-height: 1.55; }
+    a.button { display: inline-block; margin: 12px 0; padding: 13px 18px; border-radius: 10px; background: #1677d2; color: #fff; font-weight: 700; text-decoration: none; }
+    code { padding: 2px 5px; border-radius: 5px; background: #eee; }
+    .note { color: #555; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>HH автоотклики</h1>
+    <p>Локальный сервер работает. Выберите установку как локальное расширение либо через Violentmonkey.</p>
+    <h2>Chrome / Edge</h2>
+    <ol>
+      <li>Откройте <code>chrome://extensions</code> или <code>edge://extensions</code>.</li>
+      <li>Включите <strong>Режим разработчика</strong>.</li>
+      <li>Нажмите <strong>Загрузить распакованное расширение</strong>.</li>
+      <li>Выберите папку проекта, в которой лежит <code>manifest.json</code>.</li>
+    </ol>
+    <h2>Tampermonkey / Violentmonkey</h2>
+    <p>Если менеджер userscript уже установлен, можно использовать исходный файл:</p>
+    <p><a class="button" href="/hh-auto-response.user.js">Открыть userscript</a></p>
+    <h2>После установки</h2>
+    <ol>
+      <li>Войдите в HeadHunter и настройте поисковую выдачу.</li>
+      <li>На странице выдачи появится панель <strong>HH автоотклики</strong>.</li>
+      <li>Проверьте лимит и фильтры, затем нажмите <strong>Запустить</strong>.</li>
+    </ol>
+    <p class="note">Сам локальный сервер отклики не отправляет. Перед началом рассылки userscript запросит отдельное подтверждение.</p>
+  </main>
+</body>
+</html>

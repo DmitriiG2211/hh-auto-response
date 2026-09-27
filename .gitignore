@@ -1,0 +1,10 @@
+# Files generated on one computer; do not publish them.
+*.log
+*.lnk
+nul')
+
+# Local dependencies and editor state.
+node_modules/
+.vscode/
+.idea/
+*.tmp

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>HH Auto — локальный тест</title>
+  <style>
+    body { margin: 40px; background: #f4f5f6; color: #171717; font: 15px Arial, sans-serif; }
+    article, [role="dialog"] { max-width: 640px; padding: 22px; border-radius: 18px; background: #fff; box-shadow: 0 8px 30px #0001; }
+    a, button { display: inline-block; margin-top: 12px; padding: 10px 14px; border: 0; border-radius: 9px; background: #1685e5; color: #fff; cursor: pointer; text-decoration: none; }
+    textarea, input[type="text"] { display: block; width: 90%; min-height: 42px; margin-top: 12px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <h1>Локальный тест HH Auto</h1>
+  <p>Ни один элемент этой страницы не отправляет данные в интернет.</p>
+
+  <article data-qa="vacancy-serp__vacancy">
+    <div id="888888888">
+      <a data-qa="serp-item__title" href="https://hh.ru/vacancy/888888888">Тестовая вакансия со сложной формой</a>
+      <br>
+      <a
+        data-qa="vacancy-serp__vacancy_response"
+        href="https://hh.ru/applicant/vacancy_response?vacancyId=888888888"
+        onclick="openComplexResponse(event)"
+      >Откликнуться</a>
+    </div>
+  </article>
+
+  <article data-qa="vacancy-serp__vacancy">
+    <div id="999999999">
+      <a data-qa="serp-item__title" href="https://hh.ru/vacancy/999999999">Тестовая вакансия — ничего не отправляется</a>
+      <br>
+      <a
+        data-qa="vacancy-serp__vacancy_response"
+        href="https://hh.ru/applicant/vacancy_response?vacancyId=999999999"
+        onclick="openMockResponse(event)"
+      >Откликнуться</a>
+    </div>
+  </article>
+
+  <div id="complexDialog" data-qa="vacancy-response-popup" role="dialog" hidden>
+    <h2>Вопросы работодателя</h2>
+    <label>Ответьте на вопросы работодателя<input type="text" required></label>
+    <button data-qa="vacancy-response-submit-popup" disabled>Отправить отклик</button>
+    <button data-qa="vacancy-response-popup-close" onclick="closeComplexResponse(event)">Закрыть</button>
+  </div>
+
+  <div id="normalDialog" data-qa="vacancy-response-popup" role="dialog" hidden>
+    <h2>Тестовый отклик</h2>
+    <textarea data-qa="vacancy-response-popup-form-letter-input" aria-label="Сопроводительное письмо"></textarea>
+    <button data-qa="vacancy-response-submit-popup" onclick="submitMockResponse(event)">Отправить отклик</button>
+    <button data-qa="vacancy-response-popup-close" onclick="closeMockResponse(event)">Закрыть</button>
+  </div>
+
+  <script>
+    function openMockResponse(event) {
+      event.preventDefault();
+      document.querySelector('#normalDialog').hidden = false;
+    }
+
+    function openComplexResponse(event) {
+      event.preventDefault();
+      history.pushState({}, '', '/applicant/vacancy_response?vacancyId=888888888');
+      document.body.innerHTML = `
+        <h1>Отклик на вакансию</h1>
+        <p>Для отклика необходимо ответить на несколько вопросов работодателя.</p>
+        <label>Вопрос работодателя<textarea required></textarea></label>
+      `;
+    }
+
+    function submitMockResponse(event) {
+      event.preventDefault();
+      const dialog = document.querySelector('#normalDialog');
+      dialog.innerHTML = '<div role="status">Отклик отправлен</div><button data-qa="vacancy-response-popup-close" onclick="closeMockResponse(event)">Закрыть</button>';
+      const card = document.querySelector('[data-qa="vacancy-serp__vacancy"]');
+      card.append(' Вы откликнулись');
+    }
+
+    function closeMockResponse(event) {
+      event.preventDefault();
+      document.querySelector('#normalDialog').hidden = true;
+    }
+
+    function closeComplexResponse(event) {
+      event.preventDefault();
+      document.querySelector('#complexDialog').hidden = true;
+    }
+  </script>
+  <script src="/hh-auto-response.user.js"></script>
+</body>
+</html>
